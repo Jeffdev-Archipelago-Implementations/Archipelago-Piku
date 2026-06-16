@@ -18,7 +18,7 @@ class TestCoinsanity(PikunikuTestBase):
     def test_exact_amount_of_five_coins_are_progression(self) -> None:
         progression_coins = [item for item in self.get_items_by_name("5 Coins") if item.advancement]
         self.assertEqual(len(progression_coins), locations.PROGRESSION_FIVE_COINS_COUNT)
-        self.assertEqual(locations.PROGRESSION_FIVE_COINS_COUNT, 20)
+        self.assertEqual(locations.PROGRESSION_FIVE_COINS_COUNT, 18)
 
     def test_shops_require_coins(self) -> None:
         all_shop_locations = sorted(locations.SHOP_PRICES)

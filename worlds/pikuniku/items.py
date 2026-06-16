@@ -7,18 +7,11 @@ from BaseClasses import Item, ItemClassification
 if TYPE_CHECKING:
     from .world import PikunikuWorld
 
-BASE_ITEM_ID = 7771000
+BASE_ITEM_ID = 100
 
 # Default classification for every item.
 # Items that only exist on certain options must still be present here and in ITEM_NAME_TO_ID.
 DEFAULT_ITEM_CLASSIFICATIONS = {
-    # Movement abilities.
-    # These are progression-relevant in the long run (required to beat the game),
-    # but they are NOT accounted for in logic yet, so they are not added to the item pool.
-    # Their IDs are reserved here so they can be added later without breaking compatibility.
-    "Grapple": ItemClassification.progression,
-    "Roll": ItemClassification.progression,
-    "Kick": ItemClassification.progression,
     # Hats
     "Pencil Hat": ItemClassification.progression,
     "Water Hat": ItemClassification.progression,
@@ -28,7 +21,6 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Beast Mask": ItemClassification.filler,
     "Some Arms": ItemClassification.filler,
     # Key Items
-    "Scarecrow Face": ItemClassification.progression,
     "Magnetic Card": ItemClassification.progression,
     "The Cabin Key": ItemClassification.progression,
     "A Detonator": ItemClassification.progression,
@@ -71,7 +63,6 @@ UNIQUE_PROGRESSION_ITEMS = [
     "Pencil Hat",
     "Water Hat",
     "Sunglasses",
-    "Scarecrow Face",
     "Magnetic Card",
     "The Cabin Key",
     "A Detonator",
@@ -134,7 +125,6 @@ ITEM_NAME_GROUPS = {
         "Piku & Niku V Trophy",
     },
     "Key Items": {
-        "Scarecrow Face",
         "Magnetic Card",
         "The Cabin Key",
         "A Detonator",
@@ -175,9 +165,8 @@ def create_all_items(world: PikunikuWorld) -> None:
         itempool += [world.create_item(name) for name in COOP_ITEMS]
 
     if world.options.coinsanity:
-        # One "5 Coins" item per freestanding coin location, mirroring the vanilla coin count.
+        # One "5 Coins" item per freestanding coin location.
         # Only enough of them to afford every shop purchase are progression, the rest are filler.
-        # skip_balancing because they are currency-like and exist in large quantities.
         for index in range(len(locations.COIN_LOCATIONS)):
             classification = (
                 ItemClassification.progression_skip_balancing

@@ -9,11 +9,7 @@ from . import locations
 if TYPE_CHECKING:
     from .world import PikunikuWorld
 
-# Entry requirements per the logic sheet's area table. These are absolute requirement sets,
-# so every region is connected directly from the origin region (The Valley) with its full rule,
-# rather than chaining regions together. The result is logically identical.
-# The Valley itself is the origin region: the Pencil Hat check (and others) are reachable
-# from the start with no items.
+# Entry requirements per the logic sheet's area table, minus the Valley, which has no requirements.
 REGION_ENTRY_REQUIREMENTS: dict[str, tuple[str, ...]] = {
     "Apple Temple": locations.APPLE_TEMPLE,
     "The Valley Road": locations.VALLEY_MAIN,

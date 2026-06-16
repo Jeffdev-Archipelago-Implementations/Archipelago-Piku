@@ -3,23 +3,23 @@ from __future__ import annotations
 import math
 from typing import TYPE_CHECKING, NamedTuple
 
-from BaseClasses import Location
+from BaseClasses import Location, LocationProgressType
 
 from . import items
 
 if TYPE_CHECKING:
     from .world import PikunikuWorld
 
-BASE_LOCATION_ID = 7772000
+BASE_LOCATION_ID = 100
 
 # Item requirement shorthands. Each location's requirements are absolute
 # (they include everything needed to reach and clear the location).
 # "Apple x3" is parsed as Has("Apple", count=3) in rules.py.
 # "Coins" is only applied as a requirement when coinsanity is enabled.
-VALLEY_MAIN = ("Scarecrow Face",)
+VALLEY_MAIN = ("Pencil Hat",)
 APPLE_TEMPLE = (*VALLEY_MAIN, "Apple x3")
 FROG_TEMPLE = (*VALLEY_MAIN, "Water Hat")
-PAST_EL_BUNKO = (*VALLEY_MAIN, "Magnetic Card")
+PAST_EL_BUNKO = (*VALLEY_MAIN, "Sunglasses", "Magnetic Card")
 VALLEY_REVISITED = (*PAST_EL_BUNKO, "Water Hat")
 LAKE = (*PAST_EL_BUNKO, "Water Hat")
 CAVE = (*LAKE, "The Cabin Key")
@@ -31,7 +31,7 @@ COIN_VALUE = 5
 SHOP_PRICES = {
     "Valley Plush Purchase": 15,
     "Forest Sunglasses Purchase": 1,
-    "Forest Postcard Purchase": 10,
+    "Forest Postcard Purchase": 1,
     "Forest X-Ray Goggles Purchase": 70,
 }
 
@@ -59,13 +59,13 @@ BASE_LOCATIONS = [
     # Trophies
     PikunikuLocationData("Walking Piku Trophy", "The Valley"),
     PikunikuLocationData("The Hidden Rock Trophy", "The Valley"),
-    PikunikuLocationData("Baskick Champion Trophy", "The Valley", VALLEY_MAIN),
+    PikunikuLocationData("Baskick Champion Trophy", "The Valley"),
     PikunikuLocationData("Sam The Slime Trophy", "The Valley Road", VALLEY_MAIN),
     PikunikuLocationData("The Resistance Trophy", "The Forest", PAST_EL_BUNKO),
     PikunikuLocationData("A Giant Robot Trophy", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("Demonic Toast Trophy", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("PikDug Trophy", "The Lake", LAKE),
-    PikunikuLocationData("Piku at The Beach Trophy", "The Valley", (*VALLEY_MAIN, "Water Hat")),
+    PikunikuLocationData("Piku at The Beach Trophy", "The Valley", ("Water Hat",)),
     PikunikuLocationData("The Worms Trophy", "The Cave", SUNSHINE_HQ),
     PikunikuLocationData("Ernie the Worm Trophy", "The Cave", SUNSHINE_HQ),
     PikunikuLocationData("Sunshine Inc. Robot Trophy", "Sunshine HQ", SUNSHINE_HQ),
@@ -75,7 +75,7 @@ BASE_LOCATIONS = [
     PikunikuLocationData("Road to Forest Dancing Bug", "The Valley Road", VALLEY_MAIN),
     PikunikuLocationData("Forest Dancing Bug", "The Forest", (*VALLEY_MAIN, "Water Hat")),
     PikunikuLocationData("Cave Dancing Bug", "The Cave", CAVE),
-    PikunikuLocationData("Volcano Dancing Bug", "Sunshine HQ", SUNSHINE_HQ),
+    PikunikuLocationData("Sunshine HQ Dancing Bug", "Sunshine HQ", SUNSHINE_HQ),
     # Shops ("Coins" only applies when coinsanity is enabled)
     PikunikuLocationData("Valley Plush Purchase", "The Valley", ("Coins",)),
     PikunikuLocationData("Forest Sunglasses Purchase", "The Forest", ("Coins", *VALLEY_MAIN)),
@@ -207,23 +207,23 @@ COIN_LOCATIONS = [
     PikunikuLocationData("Forest: Coin above community house", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("Forest: Coin to the right of toastopia house", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("Forest: Coin after rope bridge right of houses", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin atop last tree branch 1", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin atop last tree branch 2", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 1", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 2", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 3", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 4", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 5", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 6", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 7", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 8", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 9", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 10", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 11", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 12", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 13", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 14", "The Forest", VALLEY_MAIN),
-    PikunikuLocationData("Forest: Coin on moving cloud 15", "The Forest", VALLEY_MAIN),
+    PikunikuLocationData("Forest: Coin atop last tree branch 1", "The Forest", FROG_TEMPLE), # Requires water hat
+    PikunikuLocationData("Forest: Coin atop last tree branch 2", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 1", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 2", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 3", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 4", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 5", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 6", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 7", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 8", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 9", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 10", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 11", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 12", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 13", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 14", "The Forest", FROG_TEMPLE),
+    PikunikuLocationData("Forest: Coin on moving cloud 15", "The Forest", FROG_TEMPLE),
     # Temple of the Silver Frog
     PikunikuLocationData("Frog Temple: Coin left of entrance 1", "Temple of the Silver Frog", FROG_TEMPLE),
     PikunikuLocationData("Frog Temple: Coin left of entrance 2", "Temple of the Silver Frog", FROG_TEMPLE),
@@ -262,17 +262,18 @@ COIN_LOCATIONS = [
     PikunikuLocationData("Cave: Coin before detonator tunnel 2", "The Cave", CAVE),
     PikunikuLocationData("Cave: Coin before detonator tunnel 3", "The Cave", CAVE),
     PikunikuLocationData("Cave: Coin before detonator tunnel 4", "The Cave", CAVE),
-    # The Cave (past the detonator tunnel)
-    PikunikuLocationData("Cave: Coin near moving platforms", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin after first resistance puzzle 1", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin after first resistance puzzle 2", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin hidden near plant", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin above worm room 1", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin above worm room 2", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin under worm room", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin above ernie worm", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin above gray spinning cross 1", "The Cave", CAVE),
-    PikunikuLocationData("Cave: Coin above gray spinning cross 2", "The Cave", CAVE),
+    # The Cave (past the detonator tunnel, requires Detonator)
+    PikunikuLocationData("Cave: Coin near moving platforms", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin after first resistance puzzle 1", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin after first resistance puzzle 2", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin hidden near plant", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin after second resistance puzzle", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin above worm room 1", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin above worm room 2", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin under worm room", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin above ernie worm", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin above gray spinning cross 1", "The Cave", SUNSHINE_HQ),
+    PikunikuLocationData("Cave: Coin above gray spinning cross 2", "The Cave", SUNSHINE_HQ),
 ]
 
 ALL_LOCATIONS = [*BASE_LOCATIONS, *COOP_LOCATIONS, *COIN_LOCATIONS]
@@ -310,6 +311,7 @@ def get_active_location_data(world: PikunikuWorld) -> list[PikunikuLocationData]
 def create_all_locations(world: PikunikuWorld) -> None:
     create_regular_locations(world)
     create_events(world)
+    exclude_default_locations(world)
 
 
 def create_regular_locations(world: PikunikuWorld) -> None:

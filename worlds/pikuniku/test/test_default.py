@@ -1,3 +1,5 @@
+from BaseClasses import LocationProgressType
+
 from .. import locations
 from .bases import PikunikuTestBase
 

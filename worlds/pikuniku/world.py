@@ -45,10 +45,10 @@ class PikunikuWorld(World):
             self.options.coinsanity.value = passthrough["coinsanity"]
             self.options.coop_levels.value = passthrough["coop_levels"]
 
-        if self.options.early_scarecrow_face == pikuniku_options.EarlyScarecrowFace.option_early_local:
-            self.multiworld.local_early_items[self.player]["Scarecrow Face"] = 1
-        elif self.options.early_scarecrow_face == pikuniku_options.EarlyScarecrowFace.option_early_global:
-            self.multiworld.early_items[self.player]["Scarecrow Face"] = 1
+        if self.options.early_pencil_hat == pikuniku_options.EarlyPencilHat.option_early_local:
+            self.multiworld.local_early_items[self.player]["Pencil Hat"] = 1
+        elif self.options.early_pencil_hat == pikuniku_options.EarlyPencilHat.option_early_global:
+            self.multiworld.early_items[self.player]["Pencil Hat"] = 1
 
     def create_regions(self) -> None:
         regions.create_and_connect_regions(self)
@@ -68,5 +68,9 @@ class PikunikuWorld(World):
 
     def fill_slot_data(self) -> Mapping[str, Any]:
         # Every option that affects generation must be in slot_data for Universal Tracker.
-        # death_link and death_link_amnesty don't affect logic, but the client needs them.
-        return self.options.as_dict("coinsanity", "coop_levels", "death_link", "death_link_amnesty")
+        # death_link, death_link_amnesty and piku_color don't affect logic, but the client needs them.
+        slot_data = self.options.as_dict("coinsanity", "coop_levels", "death_link", "death_link_amnesty")
+        # piku_color resolves to either a mode name ("off", "random_per_screen", "random_per_seed")
+        # or a normalized "#RRGGBB" hex string, so the client gets a single consistent string type.
+        slot_data["piku_color"] = self.options.piku_color.current_key
+        return slot_data
