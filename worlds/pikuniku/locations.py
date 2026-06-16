@@ -192,6 +192,7 @@ COIN_LOCATIONS = [
     PikunikuLocationData("Forest: Coin on cut down log", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("Forest: Coin on triple cut down logs 1", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("Forest: Coin on triple cut down logs 2", "The Forest", VALLEY_MAIN),
+    PikunikuLocationData("Forest: Coin on triple cut down logs 3", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("Forest: Coin on ramp", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("Forest: Coin on first log gear", "The Forest", VALLEY_MAIN),
     PikunikuLocationData("Forest: Coin on top of first log gear log", "The Forest", VALLEY_MAIN),

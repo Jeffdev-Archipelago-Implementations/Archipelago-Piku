@@ -1,3 +1,4 @@
+import random
 from collections.abc import Mapping
 from typing import Any
 
@@ -72,5 +73,9 @@ class PikunikuWorld(World):
         slot_data = self.options.as_dict("coinsanity", "coop_levels", "death_link", "death_link_amnesty")
         # piku_color resolves to either a mode name ("off", "random_per_screen", "random_per_seed")
         # or a normalized "#RRGGBB" hex string, so the client gets a single consistent string type.
-        slot_data["piku_color"] = self.options.piku_color.current_key
+        piku_color = self.options.piku_color.current_key
+        if piku_color == "random_per_seed":
+            # Generate a random hex color for this seed
+            piku_color = f"#{random.randint(0, 0xFFFFFF):06X}"
+        slot_data["piku_color"] = piku_color
         return slot_data
