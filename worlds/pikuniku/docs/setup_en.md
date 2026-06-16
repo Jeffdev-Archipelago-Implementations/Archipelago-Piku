@@ -15,7 +15,11 @@ Generating a multiworld game works like any other Archipelago. You will download
 ## Installation Steps
 
 1 Open your Pikuniku installation directory. On Steam, you can find it easily by right-clicking the game and clicking `Manage` > `Browse local files`.
+
 2. Extract the contents of the BepInEx zip into the Pikuniku installation directory.
+
 3. Run the game once to have it create all of the folders necessary.
+
 4. Extract the contents of the Pikuniku Archipelago Mod into the plugins folder created in the BepInEx folder.
+
 5. Run the game. If it worked, you should be able to click "Adventure" and it will show an Archipelago connection screen.
