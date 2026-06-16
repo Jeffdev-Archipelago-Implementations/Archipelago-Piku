@@ -3,7 +3,7 @@ from __future__ import annotations
 import math
 from typing import TYPE_CHECKING, NamedTuple
 
-from BaseClasses import Location, LocationProgressType
+from BaseClasses import Location
 
 from . import items
 
@@ -83,7 +83,6 @@ BASE_LOCATIONS = [
     PikunikuLocationData("Forest X-Ray Goggles Purchase", "The Forest", ("Coins", *VALLEY_MAIN)),
     # Other
     PikunikuLocationData("Pencil Hat", "The Valley"),
-    PikunikuLocationData("Scarecrow Face", "The Valley", ("Pencil Hat",)),
     PikunikuLocationData("Apple in Tree", "The Valley", VALLEY_MAIN),
     PikunikuLocationData("Apple from Bird Quest", "The Valley", VALLEY_MAIN),
     PikunikuLocationData("Apple from Hidden Rock", "The Valley", VALLEY_MAIN),
@@ -98,7 +97,8 @@ BASE_LOCATIONS = [
         "Some Arms", "The Valley (Revisited)", (*LAKE, "The Golden Tooth from the Silver Frog")
     ),
     PikunikuLocationData("Defeat the Second Giant Robot", "The Valley (Revisited)", LAKE),
-    PikunikuLocationData("The Cabin Key", "The Lake", LAKE),
+    PikunikuLocationData("The Cabin Key", "The Cave", LAKE),
+    PikunikuLocationData("A Video Game", "The Cave", LAKE),
     PikunikuLocationData("A Detonator", "The Cave", CAVE),
     PikunikuLocationData("Defeat the Third Giant Robot", "The Lake", SUNSHINE_HQ),
 ]
@@ -311,8 +311,6 @@ def get_active_location_data(world: PikunikuWorld) -> list[PikunikuLocationData]
 def create_all_locations(world: PikunikuWorld) -> None:
     create_regular_locations(world)
     create_events(world)
-    exclude_default_locations(world)
-
 
 def create_regular_locations(world: PikunikuWorld) -> None:
     locations_per_region: dict[str, dict[str, int | None]] = {}
