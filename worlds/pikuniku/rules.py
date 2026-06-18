@@ -26,6 +26,8 @@ def build_rule(world: PikunikuWorld, requirements: tuple[str, ...], location_nam
         elif requirement == "Coins":
             if world.options.coinsanity:
                 rules.append(Has("5 Coins", count=locations.get_required_five_coins(location_name)))
+        elif requirement == "Sunglasses": # Sunglasses and X-Ray Glasses are interchangeable
+            rules.append(Has("Sunglasses") | Has("X-Ray Glasses"))
         else:
             rules.append(Has(requirement))
 
