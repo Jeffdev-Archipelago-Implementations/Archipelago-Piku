@@ -73,7 +73,7 @@ BASE_LOCATIONS = [
     # Dancing Bugs
     PikunikuLocationData("Valley Dancing Bug", "The Valley"),
     PikunikuLocationData("Road to Forest Dancing Bug", "The Valley Road", VALLEY_MAIN),
-    PikunikuLocationData("Forest Dancing Bug", "The Forest", PAST_EL_BUNKO),
+    PikunikuLocationData("Forest Dancing Bug", "The Forest", VALLEY_REVISITED),
     PikunikuLocationData("Cave Dancing Bug", "The Cave", CAVE),
     PikunikuLocationData("Sunshine HQ Dancing Bug", "Sunshine HQ", SUNSHINE_HQ),
     # Shops ("Coins" only applies when coinsanity is enabled)
