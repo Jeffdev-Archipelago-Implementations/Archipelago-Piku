@@ -14,7 +14,3 @@ and all trophies are shuffled into the item pool.
 Locations include trophies, dancing bugs, shop purchases, and story progression points such as
 defeating the Giant Robots. With Coinsanity enabled, every freestanding coin in the world is also a check,
 and "5 Coins" items become progression for shop purchases.
-
-## Disclaimer
-
-Claude was utilized to assist in the creation of mod this mod, including finding spots to hook into the game, helping setup the Archipelago structure, and some other things. All code was checked by myself, and tested to work to the best of my ability.
